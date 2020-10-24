@@ -1,0 +1,25 @@
+legacy_router:
+  path: /{controller}/{device}/{action}
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+  requirements:
+    controller: .*
+    device: iphone|android
+    action: .*
+  defaults:
+    route: 'legacy_gateway'
+    permanent: true
+    keepQueryParams: true
+    keepRequestMethod: true
+
+version_router:
+  path: /{version}/{controller}/{action}
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+  requirements:
+    version: v.*
+    controller: .*
+    action: .*
+  defaults:
+    route: 'version_gateway'
+    permanent: true
+    keepQueryParams: true
+    keepRequestMethod: true
