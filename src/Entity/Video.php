@@ -18,11 +18,6 @@ class Video
     private $id;
 
     /**
-     * @ORM\Column(type="integer", name="videoCategoryId")
-     */
-    private $videoCategoryId;
-
-    /**
      * @ORM\Column(type="string", length=100)
      */
     private $name;
@@ -62,21 +57,15 @@ class Video
      */
     private $_timestamp;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=VideoCategory::class, inversedBy="videos")
+     * @ORM\JoinColumn(name="videoCategoryId", referencedColumnName="videoCategoryId")
+     */
+    private $videoCategory;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getVideoCategoryId(): ?int
-    {
-        return $this->videoCategoryId;
-    }
-
-    public function setVideoCategoryId(int $videoCategoryId): self
-    {
-        $this->videoCategoryId = $videoCategoryId;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -171,6 +160,18 @@ class Video
     public function setTimestamp(string $_timestamp): self
     {
         $this->_timestamp = $_timestamp;
+
+        return $this;
+    }
+
+    public function getVideoCategory(): ?VideoCategory
+    {
+        return $this->videoCategory;
+    }
+
+    public function setVideoCategory(?VideoCategory $videoCategory): self
+    {
+        $this->videoCategory = $videoCategory;
 
         return $this;
     }
